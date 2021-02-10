@@ -17,7 +17,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1612942739273.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1612942819002.css">
 
     <!--[if lt IE 9]>
     
@@ -134,18 +134,7 @@
     <div class="post-content">
         <div class="post-excerpt">
             
-                <h2 id="一、router-push"><a href="#一、router-push" class="headerlink" title="一、router.push()"></a>一、router.push()</h2><p>想要导航到不同的 URL，则使用 router.push 方法。这个方法会向 history 栈中添加一条新的记录。所以，当用户点击浏览器后退按钮时，则回到之前的URL页面。</p>
-<p>声明式： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to&#x3D;&quot;path&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>编程式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.push(path)</span><br></pre></td></tr></table></figure></p>
-<h2 id="二、router-replace"><a href="#二、router-replace" class="headerlink" title="二、router.replace()"></a>二、router.replace()</h2><p>和router.push()的主要区别在于，它不会向 history 添加新记录，而是跟它的方法名一样replace一样，替换掉当前的history记录。于是导航后不会留下前一个路由页面的 history 记录。即使点击返回后退按钮，也不可能退回到跳转之前的那个页面。</p>
-<p>声明式： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to&#x3D;&quot;path&quot; replace&gt;</span><br></pre></td></tr></table></figure></p>
-<p>编程式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.replace(path)</span><br></pre></td></tr></table></figure></p>
-<p>通过给push方式添加replace:true参数，也可以实现：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&#123;path: &#39;&#x2F;home&#39;, replace: true&#125;)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="三、router-go"><a href="#三、router-go" class="headerlink" title="三、router.go()"></a>三、router.go()</h2><p>这个方法的参数是一个整数，意思是在 history 记录栈中向前或者后退多少步，类似window.history.go(n)。也就是我们平时用浏览器上面的“上一页”和“下一页”功能的实现。 </p>
-
+                <p>讲解一下VUE中路由的几种方式：router.replace() router.push() router.go()的区别和使用方法,以及编程式和申明式的书写方法。  </p>
             
             <p class="more">
                 <a href="http://www.butterpig.top/blog/2021/02/10/vue-router/">阅读剩下更多</a>
@@ -544,7 +533,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1612942739274.js"></script>
+<script src="/blog/js/main.js?v=1612942819002.js"></script>
 
 
 </body>
