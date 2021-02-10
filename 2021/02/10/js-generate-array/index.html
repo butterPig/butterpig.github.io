@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>一键生成审核上传所需的合规照片功能的使用介绍，在线一键自动压缩照片，一键自动压缩审核上传照片 | ButterPig</title>
+    <title>js一种不使用循环来生成连续数组的优雅方法 | ButterPig</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端,后台, Web, 技术分享,唠唠嗑儿,印章在线设计,照片处理" >
     <meta name="description" content="butterPig的技术博客" >
@@ -17,7 +17,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1612941407368.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1612941407366.css">
 
     <!--[if lt IE 9]>
     
@@ -50,15 +50,15 @@
         <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/blog/2021/02/07/one-all-generate-great-photo/index.html" class="item ">
+            <li rel="/blog/2021/02/10/js-generate-array/index.html" class="item ">
                 <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/blog/2021/02/07/one-all-generate-great-photo/index.html" class="item ">
+            <li rel="/blog/2021/02/10/js-generate-array/index.html" class="item ">
                 <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
             </li>
             
-            <li rel="/blog/2021/02/07/one-all-generate-great-photo/index.html" class="item ">
+            <li rel="/blog/2021/02/10/js-generate-array/index.html" class="item ">
                 <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
             </li>
             
@@ -94,44 +94,34 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>一键生成审核上传所需的合规照片功能的使用介绍，在线一键自动压缩照片，一键自动压缩审核上传照片</span></h3>
+        <h3 class="post-title"><span>js一种不使用循环来生成连续数组的优雅方法</span></h3>
     </header>
     <p class="post-meta text-center">
         butterPig 发表于
-        <time datetime="2021-02-07T07:59:17.000Z">2021-02-07</time>
+        <time datetime="2021-02-10T07:10:08.000Z">2021-02-10</time>
         <span id="busuanzi_container_page_pv">
             本文总阅读量<span id="busuanzi_value_page_pv"></span>次
           </span>
     </p>
     <div id="JELON__articlePostContent" class="post-content">
-        <p>在我们的日常生活与工作中，经常遇到需要在各类网站中填写资料进行上传审核的场景，其中免不了要按照各种要求对照片进行上传。例如某网站要求上传登记照的宽度要小于200像素，高度要小于400像素，照片大小要小于500Kb等。这时候我们就要想尽办法，尝试各种APP将图片进行修改，以图达到最终要求。对于没有P图经验的人而言，这是个痛苦的任务。现在本人开发出一种可以一键生成符合不同审核规定照片的功能，提供给大家使用。首先该功能网址是<a href="http://www.butterpig.top/compress" title="" target="">butterPig</a>下面介绍使用帮助。</p>
-<a id="more"></a> 
-
-<h2 id="STEP1"><a href="#STEP1" class="headerlink" title="STEP1"></a>STEP1</h2><p>首先点击加号，选择某张需要转换的图片进行加载。每次最多只能选择一张照片。在照片缩略图左侧会显示原始照片的相关数据。</p>
-<img src="/blog/2021/02/07/one-all-generate-great-photo/add.png" class="">  
-<p>此时，将鼠标移动到照片预览框中，点击放大镜可以浏览照片原图，点击删除后可以将加载的照片删除。注意：只有在删除了加载的照片后，才能点击加号选择加载另一张照片，否则点击加号没有响应。  </p>
-<img src="/blog/2021/02/07/one-all-generate-great-photo/preview.png" class="">  
-
-<h2 id="STEP2"><a href="#STEP2" class="headerlink" title="STEP2"></a>STEP2</h2><p>此时下方输入框中也会自动加载当前图片的原始宽高，并且宽高比是始终锁定的，可以根据审核的标准，手动的改变宽高大小。并且设置转换后希望被限制的最大文件大小。</p>
-<img src="/blog/2021/02/07/one-all-generate-great-photo/size.png" class="">  
-
-<h2 id="STEP3"><a href="#STEP3" class="headerlink" title="STEP3"></a>STEP3</h2><p>选择生成图片所使用的算法，默认是使用混合算法，不需要修改。如果对图片的清晰度要求不高，同时对图片的最大尺寸较为敏感，可以使用尺寸优先算法。但是绝大多数情况下，不需要修改图片生成算法。  </p>
-<img src="/blog/2021/02/07/one-all-generate-great-photo/function.png" class=""> 
-
-<h2 id="STEP4"><a href="#STEP4" class="headerlink" title="STEP4"></a>STEP4</h2><p>点击一键生成按钮，等待几秒钟即可自动生成符合审核规定的照片。并弹出下载框,可以观察下载框上标注的文件尺寸大小是否符合要求，并点击保存到本地即可。 </p>
-<img src="/blog/2021/02/07/one-all-generate-great-photo/final.png" class="">   
-<center>----------------------</center>
+        
     </div>
     <p class="eof">-- EOF --</p>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/blog/categories/butterPig%E7%BD%91%E7%AB%99/">butterPig网站</a>
+            <a class="cat-link" href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/">唠唠嗑儿</a>|<a class="cat-link" href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>|<a class="cat-link" href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/Java%E6%8A%80%E6%9C%AF/">Java技术</a>|<a class="cat-link" href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/Java%E6%8A%80%E6%9C%AF/butterPig%E7%BD%91%E7%AB%99/">butterPig网站</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/blog/tags/butterPig%E7%BD%91%E7%AB%99/" title="butterPig网站">butterPig网站</a>
+        <a href="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/" title="唠唠嗑儿">唠唠嗑儿</a> / 
+    
+        <a href="/blog/tags/butterPig%E7%BD%91%E7%AB%99/" title="butterPig网站">butterPig网站</a> / 
+    
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a> / 
+    
+        <a href="/blog/tags/Java%E6%8A%80%E6%9C%AF/" title="Java技术">Java技术</a>
     
 
         </span>
@@ -157,20 +147,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/blog/2021/02/10/great-seal-online-design/">
-            
-                印章在线生成工具，在线印章设计，高清印章生成下载，多功能印章在线生成工具使用说明
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/blog/2021/02/05/vscode-write-markdown/">
+        <a href="/blog/2021/02/10/great-seal-online-design/">
             
-                使用vscode以及idea的markdown编辑插件，效果不错还能实时预览
+                印章在线生成工具，在线印章设计，高清印章生成下载，多功能印章在线生成工具使用说明
             
         </a>
     </span>
@@ -313,7 +299,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1612941407369.js"></script>
+<script src="/blog/js/main.js?v=1612941407367.js"></script>
 
 
 </body>
