@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>使用vscode以及idea的markdown编辑插件，效果不错还能实时预览 | ButterPig</title>
+    <title>hexo博客使用不蒜子添加访问量和阅读量功能 | ButterPig</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端,后台, Web, 技术分享,唠唠嗑儿,印章在线设计,照片处理" >
     <meta name="description" content="butterPig的技术博客" >
@@ -17,7 +17,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1613136554381.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1613136554375.css">
 
     <!--[if lt IE 9]>
     
@@ -50,15 +50,15 @@
         <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/blog/2021/02/05/vscode-write-markdown/index.html" class="item ">
+            <li rel="/blog/2021/02/12/hexo-blog-use-busuanzi/index.html" class="item ">
                 <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/blog/2021/02/05/vscode-write-markdown/index.html" class="item ">
+            <li rel="/blog/2021/02/12/hexo-blog-use-busuanzi/index.html" class="item ">
                 <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
             </li>
             
-            <li rel="/blog/2021/02/05/vscode-write-markdown/index.html" class="item ">
+            <li rel="/blog/2021/02/12/hexo-blog-use-busuanzi/index.html" class="item ">
                 <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
             </li>
             
@@ -94,27 +94,33 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>使用vscode以及idea的markdown编辑插件，效果不错还能实时预览</span></h3>
+        <h3 class="post-title"><span>hexo博客使用不蒜子添加访问量和阅读量功能</span></h3>
     </header>
     <p class="post-meta text-center">
         butterPig 发表于
-        <time datetime="2021-02-05T06:34:20.000Z">2021-02-05</time>
+        <time datetime="2021-02-12T12:18:27.000Z">2021-02-12</time>
         <span id="busuanzi_container_page_pv">
             本文总阅读量<span id="busuanzi_value_page_pv"></span>次
           </span>
     </p>
     <div id="JELON__articlePostContent" class="post-content">
-        <p>因为第一次写markdown，在网上各种百度，想看看到底哪些专门的markdown编辑器好用，下载了好几种。但是真正的使用体验完全没有文章里说的那些惊艳激动人心。最终想回归到平时使用最多的开发环境IDE中寻找答案。  </p>
+        <p>hexo最终生成静态网页，一般是引入不蒜子来实现记录和展示博客总访问量总访客数以及每篇文章的阅读量。不蒜子是一个极其简洁的网页计数器，因为自己做的静态博客需要用到就把他的js给集成进去，简单说下原理，总访问量和总访客数基于网站的域名一一对应，通过远程的js集成，将数据通过/busuanzi.ibruce.info/busuanzi的访问持久化，即便再次生成文章或者网站，只要链接路径没有变，浏览量还是可以在原有的基础上继续累积。 </p>
 <a id="more"></a>
-<img src="/blog/2021/02/05/vscode-write-markdown/vs-markdown-write.png" class="">
 
-<p>在vscode里面安装markdown支持插件也非常容易。直接在vscode的扩展里面搜索markdown，选着最上面下载次数最多的那个Markdown All in One就全部搞定，这名字有点全家桶的味道。用起来效果不错，在右边就可以实时的预览，没有延迟。左边打字右边马上就能渲染出来，没有网络的时候也可以使用。据说有很多markdown实时预览是需要有网络的。</p>
-<img src="/blog/2021/02/05/vscode-write-markdown/markdown-ex.png" class="">  
+<h2 id="js脚本引入"><a href="#js脚本引入" class="headerlink" title="js脚本引入"></a>js脚本引入</h2><p>在需要的页面引入这个脚本即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src&#x3D;&quot;&#x2F;&#x2F;busuanzi.ibruce.info&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt; </span><br></pre></td></tr></table></figure>    
 
-<p>另外，因为平时开发使用idea比较多，就把markdown用idea打开试了下，idea提示自动下载插件，然后也和vscode一样，比较稳定方便的书写和预览markdown了。感觉不错。  </p>
-<p>我还安装了另几个书写markdown的编辑器，反而效果没有太好。比如markdownPad，安装好一进去就疯狂报错，让跳转到指定页面解决问题，然而啥也解决不了。官方说是因为win10系统的原因导致的，我用win7兼容模式打开也不停的提示渲染错误。  </p>
-<p>还安装了印象笔记，网上宣传的不错，不过安装之后要注册登录才行，然后免费版会提示你要升级plus版，还会弹出广告框之类的，实在忍不了卸载了。  </p>
-<p>听说notepad++里面也有markdown插件，下载安装之后，发现notepad里面的markdown插件虽然能预览，但是不能实时的渲染，每次想看最新渲染，必须把预览窗关了再重新打开。。。总之对于一个markdown新手来说，感觉vscode里面的免费markdown编辑器已经挺满意的了。</p>
+<h2 id="总访问量（pv算法）"><a href="#总访问量（pv算法）" class="headerlink" title="总访问量（pv算法）"></a>总访问量（pv算法）</h2><p>要显示站点总访问量，复制以下代码，不能改动其中的id，添加到你需要显示的位置，其他内容可以根据样式进行修改。pv的模式，同一个用户连续访问n次，或者点击n次文章，记录n次访问量。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;span id&#x3D;&quot;busuanzi_container_site_pv&quot;&gt;</span><br><span class="line">    本站总访问量&lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;次</span><br><span class="line">&lt;&#x2F;span&gt; </span><br></pre></td></tr></table></figure>    
+
+<h2 id="总访客数（uv算法）"><a href="#总访客数（uv算法）" class="headerlink" title="总访客数（uv算法）"></a>总访客数（uv算法）</h2><p>要显示站点总访客数，复制以下代码，不能改动其中的id，添加到你需要显示的位置，其他内容可以根据样式进行修改。uv的方式，同一个用户连续访问n次或者点击n次文章，只记录一次访客数。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;span id&#x3D;&quot;busuanzi_container_site_uv&quot;&gt;</span><br><span class="line">  本站访客数&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;人次</span><br><span class="line">&lt;&#x2F;span&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="页面或者文章阅读量"><a href="#页面或者文章阅读量" class="headerlink" title="页面或者文章阅读量"></a>页面或者文章阅读量</h2><p>要显示每篇文章的阅读量，复制以下代码添加到你需要显示的位置。</p>
+<p>文章阅读量使用pv的方式，同一个用户点击一篇文章，本篇文章记录一次阅读量。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;span id&#x3D;&quot;busuanzi_container_page_pv&quot;&gt;</span><br><span class="line">  本文总阅读量&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt;次</span><br><span class="line">&lt;&#x2F;span&gt; </span><br></pre></td></tr></table></figure>  
+
+<h2 id="重要提示"><a href="#重要提示" class="headerlink" title="重要提示"></a>重要提示</h2><p>不蒜子无法在文章列表页面显示每篇文章的阅读量，例如你的hexo博客里面有一个文章列表页面，页面内同时展示了很多篇你写的文章，包括标题以及摘要等等。此时无法使用不蒜子显示每篇文章的阅读量。因为不蒜子是根据文章的具体路径来绑定阅读量数据的。因此在文章列表页面，不蒜子是获取不到每篇文章的阅读量的。只能在点击进入到某一篇文章内容后，在文章详情页获取到阅读量。</p>
 
     </div>
     <p class="eof">-- EOF --</p>
@@ -126,7 +132,7 @@
             标签：
             
     
-        <a href="/blog/tags/markdown/" title="markdown">markdown</a>
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a>
     
 
         </span>
@@ -152,20 +158,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/blog/2021/02/07/one-all-generate-great-photo/">
-            
-                一键生成审核上传所需的合规照片功能的使用介绍，在线一键自动压缩照片，一键自动压缩审核上传照片
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/blog/2021/02/05/nginx-gzip-usage/">
+        <a href="/blog/2021/02/10/vue-router/">
             
-                使用nginx的gzip压缩功能来显著加速前端项目的访问速度
+                VUE中路由的几种方式router.replace() router.push() router.go()的区别和使用方法,编程式和申明式
             
         </a>
     </span>
@@ -291,7 +293,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1613136554381.js"></script>
+<script src="/blog/js/main.js?v=1613136554376.js"></script>
 
 
 </body>
