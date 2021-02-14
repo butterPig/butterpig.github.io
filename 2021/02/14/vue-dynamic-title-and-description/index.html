@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>印章在线生成工具，在线印章设计，高清印章生成下载，多功能印章在线生成工具使用说明 | ButterPig</title>
+    <title>vue项目每个页面设置动态的title标题以及description描述以及keywords关键词，来实现seo优化 | ButterPig</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="前端,后台, Web, 技术分享,唠唠嗑儿,印章在线设计,照片处理" >
     <meta name="description" content="butterPig的技术博客" >
@@ -17,7 +17,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1613303591840.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1613303591834.css">
 
     <!--[if lt IE 9]>
     
@@ -50,15 +50,15 @@
         <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/blog/2021/02/10/great-seal-online-design/index.html" class="item ">
+            <li rel="/blog/2021/02/14/vue-dynamic-title-and-description/index.html" class="item ">
                 <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/blog/2021/02/10/great-seal-online-design/index.html" class="item ">
+            <li rel="/blog/2021/02/14/vue-dynamic-title-and-description/index.html" class="item ">
                 <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
             </li>
             
-            <li rel="/blog/2021/02/10/great-seal-online-design/index.html" class="item ">
+            <li rel="/blog/2021/02/14/vue-dynamic-title-and-description/index.html" class="item ">
                 <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
             </li>
             
@@ -94,52 +94,40 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>印章在线生成工具，在线印章设计，高清印章生成下载，多功能印章在线生成工具使用说明</span></h3>
+        <h3 class="post-title"><span>vue项目每个页面设置动态的title标题以及description描述以及keywords关键词，来实现seo优化</span></h3>
     </header>
     <p class="post-meta text-center">
         butterPig 发表于
-        <time datetime="2021-02-10T01:23:42.000Z">2021-02-10</time>
+        <time datetime="2021-02-14T11:02:39.000Z">2021-02-14</time>
         <span id="busuanzi_container_page_pv">
             本文总阅读量<span id="busuanzi_value_page_pv"></span>次
           </span>
     </p>
     <div id="JELON__articlePostContent" class="post-content">
-        <p>该在线工具是一款功能丰富的在线印章设计工具集<a href="http://www.butterpig.top/seal" title="" target="">butterPig</a>，能够实现印章中每个部份的完全分离，从而对每个细节进行独立的精细调整。  </p>
-<img src="/blog/2021/02/10/great-seal-online-design/seal.png" class="">  
+        <p>想要网站每个页面的描述更加准确，让搜索引擎更好的进行seo，网站更好的被收录。需要对每个页面设置单独的标题，关键词和描述文字。在vue单页面项目中，我们可以通过在路由表中的路由对象中添加属性，并通过router.aftereach()或者router.beforeeach()钩子函数来实现路由变化的监听，每次路由变化后，将新的title，description和keywords更新到当前的页面。</p>
 <a id="more"></a>
 
-<h2 id="module1"><a href="#module1" class="headerlink" title="module1"></a>module1</h2><p>第一部分是位于印章的顶部文字，公司名称填写的部分。其中我们可以在输入了公司名称后，通过下方相对应的按钮，来调整公司名称文字的位置，大小，字间距，以及还可以关闭公司名称的显示。  </p>
-<img src="/blog/2021/02/10/great-seal-online-design/module1.png" class="">  
+<h2 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h2><p>在index.html的head中添加两个meta标签。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta data-n-head&#x3D;&quot;1&quot; data-hid&#x3D;&quot;description&quot; name&#x3D;&quot;description&quot; content&#x3D;&quot;&quot;&gt;</span><br><span class="line"> &lt;meta data-n-head&#x3D;&quot;1&quot; data-hid&#x3D;&quot;keywords&quot; name&#x3D;&quot;keywords&quot; content&#x3D;&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>  
 
-<h2 id="module2"><a href="#module2" class="headerlink" title="module2"></a>module2</h2><p>第二部分是位于印章的中部文字，印章类型填写的部分。其中我们可以在输入了印章类别的文字后，通过下方相对应的按钮，来调整印章类别文字的位置，大小，字间距，以及还可以关闭印章类别文字的显示。  </p>
-<img src="/blog/2021/02/10/great-seal-online-design/module2.png" class="">  
+<h2 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h2><p>在router里面的路由index.js文件中，添加每个页面的meta内容。例如：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;index&#39;,</span><br><span class="line">      component: index,</span><br><span class="line">      meta: &#123;</span><br><span class="line">        title: &#39;首页title内容&#39;,</span><br><span class="line">        content:&#123;</span><br><span class="line">          keywords:&#39;这里是keywords,用逗号间隔&#39;,</span><br><span class="line">          description:&#39;这里是description&#39;,</span><br><span class="line">        &#125;,</span><br><span class="line">      </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>  
 
-<h2 id="module3"><a href="#module3" class="headerlink" title="module3"></a>module3</h2><p>第三部分是位于印章的底部文字，印章编号填写的部分。其中我们可以在输入了印章编号的文字后，通过下方相对应的按钮，来调整印章编号文字的位置，大小，字间距，以及还可以关闭印章编号文字的显示。并且编号是支持输入纯数字或者中文的。  </p>
-<img src="/blog/2021/02/10/great-seal-online-design/module3.png" class="">  
-
-<h2 id="module4"><a href="#module4" class="headerlink" title="module4"></a>module4</h2><p>第四部分是位于印章的中部星星图案，可以通过下方相对应的按钮，来调整星星图案的缩放大小，可以关闭星星图案的显示。</p>
-<img src="/blog/2021/02/10/great-seal-online-design/module4.png" class="">  
-
-<h2 id="module5"><a href="#module5" class="headerlink" title="module5"></a>module5</h2><p>第五部分主要是设置印章的字体类型以及印章边缘的厚度。有几种常用字体可以选择，能够满足印章的字体需求。通过拖拽滑轮，可以调整印章边缘的厚度到合理区间。</p>
-<img src="/blog/2021/02/10/great-seal-online-design/module5.png" class="">  
-
-<h2 id="module6"><a href="#module6" class="headerlink" title="module6"></a>module6</h2><p>第六部分主要提供了集中仿真遮罩效果，可以在完美的印章上铺上一些杂质噪点，更好的模拟印章的实际使用效果。</p>
-<img src="/blog/2021/02/10/great-seal-online-design/module6.png" class="">  
-
-<p>文章最后附上印章在线设计工具的地址：<a href="http://www.butterpig.top/seal" title="" target="">butterPig</a></p>
-<center>----------------------</center>
+<h2 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h2><p>在main.js文件中，使用钩子函数来监听路由变化，将数据更新。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> router.afterEach((to,from)&#x3D;&gt;&#123;</span><br><span class="line">  if (to.meta.title) &#123;</span><br><span class="line">    document.title &#x3D; to.meta.title</span><br><span class="line">  &#125;</span><br><span class="line">  if(to.meta.content)&#123;</span><br><span class="line">    let head &#x3D; document.getElementsByTagName(&#39;head&#39;);</span><br><span class="line">    let meta &#x3D; document.createElement(&#39;meta&#39;);</span><br><span class="line">    document.querySelector(&#39;meta[name&#x3D;&quot;keywords&quot;]&#39;).setAttribute(&#39;content&#39;, to.meta.content.keywords)</span><br><span class="line">    document.querySelector(&#39;meta[name&#x3D;&quot;description&quot;]&#39;).setAttribute(&#39;content&#39;, to.meta.content.description)</span><br><span class="line">    meta.content &#x3D; to.meta.content;</span><br><span class="line">    head[0].appendChild(meta)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;) </span><br></pre></td></tr></table></figure>   
+<p>可以通过浏览器中的开发者工具里面的查看器之类的工具，来查看页面的html是否包含这些数据。</p>
 
     </div>
     <p class="eof">-- EOF --</p>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/blog/categories/butterPig%E7%BD%91%E7%AB%99/">butterPig网站</a>
+            <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/blog/tags/butterPig%E7%BD%91%E7%AB%99/" title="butterPig网站">butterPig网站</a>
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a>
     
 
         </span>
@@ -165,20 +153,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/blog/2021/02/10/js-generate-array/">
-            
-                js一种不使用循环来生成连续数组的优雅方法
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/blog/2021/02/07/one-all-generate-great-photo/">
+        <a href="/blog/2021/02/13/svg-star/">
             
-                一键生成审核上传所需的合规照片功能的使用介绍，在线一键自动压缩照片，一键自动压缩审核上传照片
+                使用svg路径来画矢量正五角星图形，并实现缩放
             
         </a>
     </span>
@@ -306,7 +290,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1613303591841.js"></script>
+<script src="/blog/js/main.js?v=1613303591835.js"></script>
 
 
 </body>
