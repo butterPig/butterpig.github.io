@@ -16,14 +16,14 @@
   </script>
 
     
-    <title>`唠唠嗑儿`标签下的文章 | ButterPig</title>
+    <title>实现了椭圆形印章的在线设计功能,一开始误以为椭圆有点麻烦，就只实现了圆形的 | ButterPig</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     
-            <meta name="keywords" content="技术分享,图像处理工具,前端开发技术,后台开发技术,唠唠嗑儿,搜索引擎大全,在线图章印章设计,一键图像压缩" >
+        <meta name="keywords" content="椭圆印章,印章设计,在线印章,镂空印章,印章图片下载" >
         
 
     
-            <meta name="description" content="butterPig的技术博客,提供前端开发后台开发等的技术分享，以及网站的技术支撑，包括各种图像处理工具" >
+        <meta name="description" content="实现了椭圆形印章的在线设计功能" >
         
    
 
@@ -37,7 +37,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1613876825852.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1613876825768.css">
 
     <!--[if lt IE 9]>
     
@@ -68,15 +68,15 @@
         <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/index.html" class="item ">
+            <li rel="/blog/ellipse-svg-seal/index.html" class="item ">
                 <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/index.html" class="item ">
+            <li rel="/blog/ellipse-svg-seal/index.html" class="item ">
                 <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
             </li>
             
-            <li rel="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/index.html" class="item ">
+            <li rel="/blog/ellipse-svg-seal/index.html" class="item ">
                 <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
             </li>
             
@@ -108,66 +108,83 @@
     <div class="container body clearfix">
         <section class="content">
             <div class="content-main widget">
-                <!-- 按标签分类 -->
-
-    <h3 class="widget-hd">
-        <strong>
-            
-                `唠唠嗑儿`标签下的文章
-            
-        </strong>
-    </h3>
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/">唠唠嗑儿</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="http://www.butterpig.top/blog/new-travel/">
-    		新的旅程
-    	</a>
-    </h3>
-
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>实现了椭圆形印章的在线设计功能,一开始误以为椭圆有点麻烦，就只实现了圆形的</span></h3>
     </header>
-    <p class="post-meta">
+    <p class="post-meta text-center">
         butterPig 发表于
-        <time datetime="2021-02-04T14:35:01.000Z">2021-02-04</time>
-        &nbsp;&nbsp;
+        <time datetime="2021-02-19T08:02:27.000Z">2021-02-19</time>
+        <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+          </span>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <p>之前就把圆形印章的在线设计功能完全做好了，用SVG和JS实现的。然后就惰性大发，觉得椭圆的印章实现起来肯定很麻烦，就不要做了。光有一个圆形的就ok。结果最近<a href="http://www.butterpig.top/ellipseseal" title="" target="">网站</a>一直没有被收录，就想充实一下网站内容。结果发现把圆形印章的代码改成椭圆印章极其的容易，因为svg画椭圆，相较于画圆，仅仅是多了一个Y轴半径这个参数而已。因此在圆形代码上，将Y轴相关的参数修改一下，马上就形成了椭圆印章。上面的文字路径也都是正确的，再稍微调整下文字的高度就搞定了。从此又多了一个功能哈哈哈哈。  </p>
+<a id="more"></a>  
+<p>下面是椭圆印章在线设计的页面截图，功能和圆形印章是完全一样的，除了印章的形状不同。  </p>
+<img src="/blog/ellipse-svg-seal/ellipseseal.png" class="">
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/" title="唠唠嗑儿">唠唠嗑儿</a>
+        <a href="/blog/tags/svg/" title="svg">svg</a> / 
+    
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a>
     
 
         </span>
     </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>今天是记得纪念的一天，我的网站<a href="http://www.butterpig.top/" title="" target="">butterPig</a>和它包含的个人博客一起上线了哈哈。还有几天就要过春节了。没想到工信部备案只花了四天时间，效率挺高的。</p>
-
-            
-            <p class="more">
-                <a href="http://www.butterpig.top/blog/new-travel/">阅读剩下更多</a>
-            </p>
-        </div>
-    </div>
 </article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/nuxt-universal-spa/">
+            
+                使用ssr服务端渲染框架nuxt时，universal和spa模式的区别
+            
+        </a>
+    </span>
+    
 
     
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/svg-path/">
+            
+                SVG画path路径或者textpath文字路径时，使用的字母命令大全
+            
+        </a>
+    </span>
+    
+</div>
 
-    
-    <nav class="page-navigator">
-        <span class="page-number current">1</span>
-    </nav>
-    
+<!-- 文章评论 -->
 
 
 
@@ -306,7 +323,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1613876825853.js"></script>
+<script src="/blog/js/main.js?v=1613876825769.js"></script>
 
 
 </body>

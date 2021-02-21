@@ -16,7 +16,7 @@
   </script>
 
     
-    <title>`前端技术`标签下的文章 | ButterPig</title>
+    <title>hexo博客使用不蒜子添加访问量和阅读量功能 | ButterPig</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     
             <meta name="keywords" content="技术分享,图像处理工具,前端开发技术,后台开发技术,唠唠嗑儿,搜索引擎大全,在线图章印章设计,一键图像压缩" >
@@ -37,7 +37,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1613876825849.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1613876825779.css">
 
     <!--[if lt IE 9]>
     
@@ -68,15 +68,15 @@
         <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/page/2/index.html" class="item ">
+            <li rel="/blog/hexo-blog-use-busuanzi/index.html" class="item ">
                 <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/page/2/index.html" class="item ">
+            <li rel="/blog/hexo-blog-use-busuanzi/index.html" class="item ">
                 <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
             </li>
             
-            <li rel="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/page/2/index.html" class="item ">
+            <li rel="/blog/hexo-blog-use-busuanzi/index.html" class="item ">
                 <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
             </li>
             
@@ -108,36 +108,44 @@
     <div class="container body clearfix">
         <section class="content">
             <div class="content-main widget">
-                <!-- 按标签分类 -->
-
-    <h3 class="widget-hd">
-        <strong>
-            
-                `前端技术`标签下的文章
-            
-        </strong>
-    </h3>
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="http://www.butterpig.top/blog/js-generate-array/">
-    		js一种不使用循环来生成连续数组的优雅方法
-    	</a>
-    </h3>
-
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>hexo博客使用不蒜子添加访问量和阅读量功能</span></h3>
     </header>
-    <p class="post-meta">
+    <p class="post-meta text-center">
         butterPig 发表于
-        <time datetime="2021-02-10T07:10:08.000Z">2021-02-10</time>
-        &nbsp;&nbsp;
+        <time datetime="2021-02-12T12:18:27.000Z">2021-02-12</time>
+        <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+          </span>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <p>hexo最终生成静态网页，一般是引入不蒜子来实现记录和展示博客总访问量总访客数以及每篇文章的阅读量。不蒜子是一个极其简洁的网页计数器，因为自己做的静态博客需要用到就把他的js给集成进去，简单说下原理，总访问量和总访客数基于网站的域名一一对应，通过远程的js集成，将数据通过/busuanzi.ibruce.info/busuanzi的访问持久化，即便再次生成文章或者网站，只要链接路径没有变，浏览量还是可以在原有的基础上继续累积。 </p>
+<a id="more"></a>
+
+<h2 id="js脚本引入"><a href="#js脚本引入" class="headerlink" title="js脚本引入"></a>js脚本引入</h2><p>在需要的页面引入这个脚本即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src&#x3D;&quot;&#x2F;&#x2F;busuanzi.ibruce.info&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt; </span><br></pre></td></tr></table></figure>    
+
+<h2 id="总访问量（pv算法）"><a href="#总访问量（pv算法）" class="headerlink" title="总访问量（pv算法）"></a>总访问量（pv算法）</h2><p>要显示站点总访问量，复制以下代码，不能改动其中的id，添加到你需要显示的位置，其他内容可以根据样式进行修改。pv的模式，同一个用户连续访问n次，或者点击n次文章，记录n次访问量。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;span id&#x3D;&quot;busuanzi_container_site_pv&quot;&gt;</span><br><span class="line">    本站总访问量&lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;次</span><br><span class="line">&lt;&#x2F;span&gt; </span><br></pre></td></tr></table></figure>    
+
+<h2 id="总访客数（uv算法）"><a href="#总访客数（uv算法）" class="headerlink" title="总访客数（uv算法）"></a>总访客数（uv算法）</h2><p>要显示站点总访客数，复制以下代码，不能改动其中的id，添加到你需要显示的位置，其他内容可以根据样式进行修改。uv的方式，同一个用户连续访问n次或者点击n次文章，只记录一次访客数。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;span id&#x3D;&quot;busuanzi_container_site_uv&quot;&gt;</span><br><span class="line">  本站访客数&lt;span id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;人次</span><br><span class="line">&lt;&#x2F;span&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="页面或者文章阅读量"><a href="#页面或者文章阅读量" class="headerlink" title="页面或者文章阅读量"></a>页面或者文章阅读量</h2><p>要显示每篇文章的阅读量，复制以下代码添加到你需要显示的位置。</p>
+<p>文章阅读量使用pv的方式，同一个用户点击一篇文章，本篇文章记录一次阅读量。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &lt;span id&#x3D;&quot;busuanzi_container_page_pv&quot;&gt;</span><br><span class="line">  本文总阅读量&lt;span id&#x3D;&quot;busuanzi_value_page_pv&quot;&gt;&lt;&#x2F;span&gt;次</span><br><span class="line">&lt;&#x2F;span&gt; </span><br></pre></td></tr></table></figure>  
+
+<h2 id="重要提示"><a href="#重要提示" class="headerlink" title="重要提示"></a>重要提示</h2><p>不蒜子无法在文章列表页面显示每篇文章的阅读量，例如你的hexo博客里面有一个文章列表页面，页面内同时展示了很多篇你写的文章，包括标题以及摘要等等。此时无法使用不蒜子显示每篇文章的阅读量。因为不蒜子是根据文章的具体路径来绑定阅读量数据的。因此在文章列表页面，不蒜子是获取不到每篇文章的阅读量的。只能在点击进入到某一篇文章内容后，在文章详情页获取到阅读量。</p>
+
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        </span>
         <span class="post-tags">
             标签：
             
@@ -147,30 +155,48 @@
 
         </span>
     </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>直接上代码，其中end是生成的连续数组的最后一个元素的数值，start是生成的连续数组的起始数值。主要原理是因为数组类型中，其实也隐含着连续的key值，对应着数组中的每个value。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Array.from(new Array(end + 1).keys()).slice(start)</span><br></pre></td></tr></table></figure>
-
-
-
-            
-            <p class="more">
-                <a href="http://www.butterpig.top/blog/js-generate-array/">阅读剩下更多</a>
-            </p>
-        </div>
-    </div>
 </article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/svg-star/">
+            
+                使用svg路径来画矢量正五角星图形，并实现缩放
+            
+        </a>
+    </span>
+    
 
     
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/vue-router/">
+            
+                VUE中路由的几种方式router.replace() router.push() router.go()的区别和使用方法,编程式和申明式
+            
+        </a>
+    </span>
+    
+</div>
 
-    
-    <nav class="page-navigator">
-        <a class="extend prev" rel="prev" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">上页</a><a class="page-number" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">1</a><span class="page-number current">2</span>
-    </nav>
-    
+<!-- 文章评论 -->
 
 
 
@@ -309,7 +335,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1613876825850.js"></script>
+<script src="/blog/js/main.js?v=1613876825780.js"></script>
 
 
 </body>
