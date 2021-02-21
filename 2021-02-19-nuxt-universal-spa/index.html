@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?d64043440d6e269abe37c4b415c1d9e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+    
+    <title>使用ssr服务端渲染框架nuxt时，universal和spa模式的区别 | ButterPig</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    
+        <meta name="keywords" content="ssr,nuxt,服务端渲染,渲染模式,universal,spa单页应用" >
+        
+
+    
+        <meta name="description" content="使用ssr服务端渲染框架nuxt时，universal和spa模式的区别" >
+        
+   
+
+    
+
+
+    
+    <link rel="alternative" href="/atom.xml" title="ButterPig" type="application/atom+xml" >
+    
+    
+    <link rel="icon" href="/blog/favicon.ico" >
+    
+    
+<link rel="stylesheet" href="/blog/css/style.css?v=1613872701666.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="/blog/js/html5.js"></script>
+
+    <![endif]-->
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a target="_blank" rel="noopener" href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/blog/">
+                <div class="cover">
+                    <span class="name">ButterPig</span>
+                    <span class="description">我的分享</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/blog/2021-02-19-nuxt-universal-spa/index.html" class="item ">
+                <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/blog/2021-02-19-nuxt-universal-spa/index.html" class="item ">
+                <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
+            </li>
+            
+            <li rel="/blog/2021-02-19-nuxt-universal-spa/index.html" class="item ">
+                <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/butterPig" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://www.butterpig.top" target="_blank">butterPig官网</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                </p>
+                
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>使用ssr服务端渲染框架nuxt时，universal和spa模式的区别</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        butterPig 发表于
+        <time datetime="2021-02-19T09:46:29.000Z">2021-02-19</time>
+        <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+          </span>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <p>nuxt官方教程里对于universal 和 spa 两种渲染模式render mode的区别，没有详细的说明，以至于在跟着官方教程新建nuxt项目的时候，一脸懵逼。如果让我凭感觉来选，我可能会选择spa模式，那就误入歧途了。  </p>
+<a id="more"></a>
+<p>先放出正确答案： 选择universal<br>理由？：</p>
+<p>可以这样武断的说，大部分人转用nuxt，是为了解决spa单页面应用非常不利于SEO的问题，而universal 和 spa 的区别也恰好就在于对seo的实现存在差异。</p>
+<p>例如基于nuxt搭建的个人博客中，在生成的网站地图sitemap.xml文件中差异非常明显，如下图：</p>
+<p>项目使用spa模式时：  </p>
+<img src="/blog/2021-02-19-nuxt-universal-spa/nuxt_spa.png" class="">  
+<p>项目选择Universal 模式时：  </p>
+<img src="/blog/2021-02-19-nuxt-universal-spa/nuxt_universal.png" class=""> 
+
+<p>所以区别非常显而易见了，spa是单页的，所以只有一个入口文件，sitemap也就只有一个url，这将导致辛辛苦苦搭建的网站ssr服务端渲染，结果最多只能被搜索引擎收录一个页面而已。</p>
+<p>而universal模式能够实现所有的路径都有被搜索引擎收录的可能性，相信这才是绝大部分人转为使用nuxt框架的最终目的。</p>
+
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a> / 
+    
+        <a href="/blog/tags/nuxt/" title="nuxt">nuxt</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/2021-02-19-why-classpath/">
+            
+                为什么我们要先配置系统环境变量，环境变量的原理
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/2021-02-19-ellipse-svg-seal/">
+            
+                实现了椭圆形印章的在线设计功能,一开始误以为椭圆有点麻烦，就只实现了圆形的
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+
+
+            </div>
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/">唠唠嗑儿</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        <span class="badge">(14)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/butterPig%E7%BD%91%E7%AB%99/">butterPig网站</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/Java%E6%8A%80%E6%9C%AF/">Java技术</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术 (11)</a>
+  
+    <a class="tag-item" href="/blog/tags/svg/" title="svg">svg (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/butterPig%E7%BD%91%E7%AB%99/" title="butterPig网站">butterPig网站 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" title="资源分享">资源分享 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/" title="唠唠嗑儿">唠唠嗑儿 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/nginx/" title="nginx">nginx (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/markdown/" title="markdown">markdown (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/seo/" title="seo">seo (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/nuxt/" title="nuxt">nuxt (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Java%E6%8A%80%E6%9C%AF/" title="Java技术">Java技术 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://www.butterpig.top" target="_blank" title="butterPig官网">butterPig官网</a>
+        </li>
+    
+        <li>
+            <a href="http://www.github.com/butterPig" target="_blank" title="Github主页">Github主页</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<footer class="footer">
+    &copy;
+    
+        2021
+    
+
+    <a href="/blog/">butterPig</a>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量:<span id="busuanzi_value_site_pv"></span>次
+    </span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="/blog/js/main.js?v=1613872701667.js"></script>
+
+
+</body>
+</html>

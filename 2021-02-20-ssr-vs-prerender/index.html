@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?d64043440d6e269abe37c4b415c1d9e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+    
+    <title>SSR服务端渲染和应用页面prerender预渲染的区别以及选择 | ButterPig</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    
+        <meta name="keywords" content="ssr,服务端渲染,预渲染,prerender,预渲染区别" >
+        
+
+    
+        <meta name="description" content="SSR服务端渲染和应用页面prerender预渲染的区别以及选择" >
+        
+   
+
+    
+
+
+    
+    <link rel="alternative" href="/atom.xml" title="ButterPig" type="application/atom+xml" >
+    
+    
+    <link rel="icon" href="/blog/favicon.ico" >
+    
+    
+<link rel="stylesheet" href="/blog/css/style.css?v=1613872701663.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="/blog/js/html5.js"></script>
+
+    <![endif]-->
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a target="_blank" rel="noopener" href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/blog/">
+                <div class="cover">
+                    <span class="name">ButterPig</span>
+                    <span class="description">我的分享</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/blog/2021-02-20-ssr-vs-prerender/index.html" class="item ">
+                <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/blog/2021-02-20-ssr-vs-prerender/index.html" class="item ">
+                <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
+            </li>
+            
+            <li rel="/blog/2021-02-20-ssr-vs-prerender/index.html" class="item ">
+                <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/butterPig" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://www.butterpig.top" target="_blank">butterPig官网</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                </p>
+                
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>SSR服务端渲染和应用页面prerender预渲染的区别以及选择</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        butterPig 发表于
+        <time datetime="2021-02-20T03:13:31.000Z">2021-02-20</time>
+        <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+          </span>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <p>最近Vue项目的网站<a href="http://www.butterpig.top/" title="" target="">butterpig</a>上线有一段时间了。但是一直没有被收录，思前想后，发现会不会是seo没有优化的原因。果然百度之后，发现vue的spa单页面应用对seo极其的不友好，百度的爬虫并不会等到js文件加载渲染完成页面后，再爬内容。因此单页面网站的内容对于百度爬虫来说，就是空的，基本上啥也没有。相当蛋疼的事情。对于vue react angular等框架开发的单页面应用，想彻底解决seo问题，还是要实现ssr服务端渲染。但是对于一个已经做好的网站，再去改成服务端渲染，实在是劳民伤财。只有使用一个折中的方案，就是预渲染。那么ssr服务端渲染和prerender预渲染的区别主要在哪，以及如何选择，下面进行分析。  </p>
+<a id="more"></a>
+<h2 id="先阐释相关的专业词汇："><a href="#先阐释相关的专业词汇：" class="headerlink" title="先阐释相关的专业词汇："></a>先阐释相关的专业词汇：</h2><p>（1）SPA（单页面应用）：只有一个主要的web页面的应用，其中的页面跳转，仅仅更新局部的模板内容，外层的公共内容只加载一次就行，适用性很广，特别是门户网站或者后台管理系统中。例如b站也是用vue搭建的单页面应用。</p>
+<pre><code>  优点：页面之间切换快，减少了服务器的压力。
+  缺点：首屏打开慢，不利于SEO搜索引擎优化，利用搜索引擎的规则是提高网站在有关搜索引擎的自然排名。
+</code></pre>
+<p>（2）SEO（搜索引擎优化）：利用例如百度等搜索引擎对于网站的收录规则，来有针对性的提高网站的搜索排名等，让网站拥有更高的曝光率。</p>
+<p>（3）SSR（服务端渲染）：因为SPA单页面应用，是通过AJAX获取数据，这就难保证我们的页面能被搜索引擎收到，并且有一些搜索引擎不支持js和通过ajax获取数据。那就更不用提SEO了，为了解决这个问题，SSR服务端渲染应运而生。SSR的出现再很大程度上改善了了SPA首屏慢的问题，又极大降低了SPA单页面应用对于SEO的先天不利影响。</p>
+<pre><code>  优点：更快的响应时间，不用等待所有的js都下载完成，显示器便能显示出比较完整的页面；更好的实现网站seo，
+  我们可以将承载了seo信息的页面直接在服务端渲染成html文件再发送给用户，从而保证了搜索引擎可以爬取到数据。
+  缺点：显著提高了服务端中CPU和内存的耗费。
+</code></pre>
+<p>（4）prerender（预渲染）：预渲染不像服务器渲染那样即时编译 HTML，它只在构建时为了特定的路由生成特定的几个静态页面，等于我们可以通过 Webpack 插件将一些特定页面组件 build 时就编译为 html 文件，直接以静态资源的形式输出给搜索引擎。从而达到为spa单页面应用优化seo的目的。</p>
+<h2 id="使用ssr服务端渲染还是prerender预渲染"><a href="#使用ssr服务端渲染还是prerender预渲染" class="headerlink" title="使用ssr服务端渲染还是prerender预渲染"></a>使用ssr服务端渲染还是prerender预渲染</h2><p>vue官方认为，如果只是为了满足spa单页面应用中少量的seo推广需求，应用中路由不多，不会存在几千个路由的情况下，推荐使用预渲染就行了。因为一个应用已经开发完成，再转到ssr服务端渲染并不是一件容易的事，是相当费时费力的。而且还存在学习成本问题。但是使用预渲染插件，几乎就可以不用改动任何项目结构和代码，实现需求。所以对于一些小网站，直接改成预渲染来提高seo能力是很好的选择，几乎零成本。</p>
+
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/2021-02-20-lizhi-bge-mp3-all/">
+            
+                逼哥李志mp3资源收集打包百度云合集
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/2021-02-19-why-classpath/">
+            
+                为什么我们要先配置系统环境变量，环境变量的原理
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+
+
+            </div>
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/">唠唠嗑儿</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        <span class="badge">(14)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/butterPig%E7%BD%91%E7%AB%99/">butterPig网站</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/Java%E6%8A%80%E6%9C%AF/">Java技术</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术 (11)</a>
+  
+    <a class="tag-item" href="/blog/tags/svg/" title="svg">svg (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/butterPig%E7%BD%91%E7%AB%99/" title="butterPig网站">butterPig网站 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" title="资源分享">资源分享 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/" title="唠唠嗑儿">唠唠嗑儿 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/nginx/" title="nginx">nginx (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/markdown/" title="markdown">markdown (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/seo/" title="seo">seo (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/nuxt/" title="nuxt">nuxt (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Java%E6%8A%80%E6%9C%AF/" title="Java技术">Java技术 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://www.butterpig.top" target="_blank" title="butterPig官网">butterPig官网</a>
+        </li>
+    
+        <li>
+            <a href="http://www.github.com/butterPig" target="_blank" title="Github主页">Github主页</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<footer class="footer">
+    &copy;
+    
+        2021
+    
+
+    <a href="/blog/">butterPig</a>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量:<span id="busuanzi_value_site_pv"></span>次
+    </span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="/blog/js/main.js?v=1613872701664.js"></script>
+
+
+</body>
+</html>
