@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?d64043440d6e269abe37c4b415c1d9e6";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+    
+    <title>移动端App消息推送服务的实现原理分析 | ButterPig</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    
+        <meta name="keywords" content="app消息推送,消息推送原理,ios推送服务,android推送服务,移动端推送,mqtt,长连接方式" >
+        
+
+    
+        <meta name="description" content="详细讲解移动端App的消息推送服务的实现原理以及相关技术" >
+        
+   
+
+    
+
+
+    
+    <link rel="alternative" href="/atom.xml" title="ButterPig" type="application/atom+xml" >
+    
+    
+    <link rel="icon" href="/blog/favicon.ico" >
+    
+    
+<link rel="stylesheet" href="/blog/css/style.css?v=1614062808646.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="/blog/js/html5.js"></script>
+
+    <![endif]-->
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a target="_blank" rel="noopener" href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/blog/">
+                <div class="cover">
+                    <span class="name">ButterPig</span>
+                    <span class="description">我的分享</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/blog/app-push-message/index.html" class="item ">
+                <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/blog/app-push-message/index.html" class="item ">
+                <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
+            </li>
+            
+            <li rel="/blog/app-push-message/index.html" class="item ">
+                <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/butterPig" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://www.butterpig.top" target="_blank">butterPig官网</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                </p>
+                
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>移动端App消息推送服务的实现原理分析</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        butterPig 发表于
+        <time datetime="2021-02-22T13:27:14.000Z">2021-02-22</time>
+        <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+          </span>
+    </p>
+    <div id="JELON__articlePostContent" class="post-content">
+        <p>手机每天都会接收到很多各种app推送的新闻或者实时聊天消息。那么这种消息推送是如何实现的呢。其实从原理上来讲，这些推送服务都是通过维护一个长连接来时刻保持与服务端的通信，从而能够实时的接收到新消息推送，但是普通的socket连接对各方面资源的消耗占用都很大，所以才会出现例如IBM提出的MQTT（Message Queuing Telemetry Transport，消息队列遥测传输）这种协议。MQTT是一种基于发布/订阅（publish/subscribe）模式的”轻量级”通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。MQTT最大优点在于，可以以极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务。作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较广泛的应用。那么所谓的长连接消息推送是如何实现的呢。  </p>
+<a id="more"></a>
+
+<h4 id="实现长连接的方式主要有："><a href="#实现长连接的方式主要有：" class="headerlink" title="实现长连接的方式主要有："></a>实现长连接的方式主要有：</h4><ol>
+<li><p>客户端不断轮询服务器，检索新内容，也就是所谓的pull方式。</p>
+</li>
+<li><p>客户端和服务器之间维护一个TCP/IP长连接，服务器向客户端不断的push。</p>
+</li>
+<li><p>当服务器有新内容时，发送一条类似短信的信令给客户端，客户端收到后从服务器中主动下载新内容，也就是SMS的推送方式。</p>
+</li>
+</ol>
+<p>苹果的推送系统和google的C2DM推送系统其实都是在系统级别维护一个TCP/IP长连接，都是基于第二种的方式进行推送的。第三种方式由于运营商没有免费开放这种信令导致了这种推送在成本上不能被接受，虽然这种推送的方式非常的稳定和高效。</p>
+<p>接下来我们了解一下android维护长连接为什么需要心跳机制。首先维护任何一个长连接都需要心跳机制，客户端发送一个心跳给服务器，服务器给客户端一个心跳应答，这样就形成客户端服务器的一次完整的握手，这个握手是让双方都知道他们之间的连接是没有断开，客户端是在线的。如果超过一个时间的阈值，客户端没有收到服务器的应答，或者服务器没有收到客户端的心跳，那么对客户端来说则断开与服务器的连接重新建立一个连接，对服务器来说只要断开这个连接即可。</p>
+<p>但是在智能手机上的长连接心跳是通过无线移动网络进行连接的，接下来我们简单的介绍一下无线移动网络的特点：当一台智能手机连上移动网络时，其实并没有真正连接上Internet，运营商分配给手机的IP其实是运营商的内网IP，手机终端要连接上Internet还必须通过运营商的网关进行IP地址的转换，这个网关简称为NAT(NetWork Address Translation)，简单来说就是手机终端连接Internet 其实就是移动内网IP，端口，外网IP之间相互映射。相当于在手机终端在移动无线网络这堵墙上打个洞与外面的Internet相连。</p>
+<p>GGSN(GateWay GPRS Support Note 网关GPRS支持节点)模块就实现了NAT功能，由于大部分的移动无线网络运营商为了减少网关NAT映射表的负荷，如果一个链路有一段时间没有通信时就会删除其对应表，造成链路中断，正是这种刻意缩短空闲连接的释放超时，原本是想节省信道资源的作用，没想到让互联网的应用不得以远高于正常频率发送心跳来维护推送的长连接。这也是为什么会有之前的信令风暴，微信收费的传言，因为这类的应用发送心跳的频率是很短的，既造成了信道资源的浪费，也造成了手机电量的快速消耗。</p>
+<h4 id="接下来我们介绍一下android系统的推送和IOS的推送有什么区别："><a href="#接下来我们介绍一下android系统的推送和IOS的推送有什么区别：" class="headerlink" title="接下来我们介绍一下android系统的推送和IOS的推送有什么区别："></a>接下来我们介绍一下android系统的推送和IOS的推送有什么区别：</h4><p>首先我们必须知道，所有的推送功能必须有一个客户端和服务器的长连接，因为推送是由服务器主动向客户端发送消息，如果客户端和服务器之间不存在一个长连接那么服务器是无法来主动连接客户端的。因而推送功能都是基于长连接的基础是上的。</p>
+<ol>
+<li><p>IOS长连接是由系统来维护的，也就是说苹果的IOS系统在系统级别维护了一个客户端和苹果服务器的长链接，IOS上的所有应用上的推送都是先将消息推送到苹果的服务器然后将苹果服务器通过这个系统级别的长链接推送到手机终端上，这样的的几个好处为：1.在手机终端始终只要维护一个长连接即可，而且由于这个长链接是系统级别的不会出现被杀死而无法推送的情况。2.省电，不会出现每个应用都各自维护一个自己的长连接。3.安全，只有在苹果注册的开发者才能够进行推送，等等。</p>
+</li>
+<li><p>android的长连接是由每个应用各自维护的，但是google也推出了与苹果技术架构相似的推送框架，C2DM,云端推送功能，但是由于google的服务器不在中国境内，其他的原因你懂的。所以导致这个推送无法使用，android的开发者不得不自己去维护一个长链接，于是每个应用如果都24小时在线，那么都得各自维护一个长连接，这种电量和流量的消耗是可想而知的。虽然国内也出现了各种推送平台，但是都无法达到只维护一个长连接这种消耗的级别。</p>
+</li>
+</ol>
+
+    </div>
+    <p class="eof">-- EOF --</p>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/blog/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/">移动端开发</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" title="移动端开发">移动端开发</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="/blog/ml5-study-1/">
+            
+                ml5机器学习浏览器端框架菜鸟教程（1）
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="/blog/2021-new-year/">
+            
+                2021年春节小记
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+
+
+            </div>
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/blog/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        <span class="badge">(15)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/butterPig%E7%BD%91%E7%AB%99/">butterPig网站</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/">唠唠嗑儿</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/Java%E6%8A%80%E6%9C%AF/">Java技术</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/">移动端开发</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/blog/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术 (11)</a>
+  
+    <a class="tag-item" href="/blog/tags/svg/" title="svg">svg (3)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" title="资源分享">资源分享 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/butterPig%E7%BD%91%E7%AB%99/" title="butterPig网站">butterPig网站 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E5%94%A0%E5%94%A0%E5%97%91%E5%84%BF/" title="唠唠嗑儿">唠唠嗑儿 (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/seo/" title="seo">seo (2)</a>
+  
+    <a class="tag-item" href="/blog/tags/nginx/" title="nginx">nginx (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/nuxt/" title="nuxt">nuxt (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/markdown/" title="markdown">markdown (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/Java%E6%8A%80%E6%9C%AF/" title="Java技术">Java技术 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" title="移动端开发">移动端开发 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习">机器学习 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://www.butterpig.top" target="_blank" title="butterPig官网">butterPig官网</a>
+        </li>
+    
+        <li>
+            <a href="http://www.github.com/butterPig" target="_blank" title="Github主页">Github主页</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<footer class="footer">
+    &copy;
+    
+        2021
+    
+
+    <a href="/blog/">butterPig</a>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量:<span id="busuanzi_value_site_pv"></span>次
+    </span>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="/blog/js/main.js?v=1614062808647.js"></script>
+
+
+</body>
+</html>
