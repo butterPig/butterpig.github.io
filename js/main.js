@@ -219,7 +219,7 @@ JELON = deepCopy(JELON, {
   },
   startSearch: function () {
     if (document.getElementById('searchKeyword').value) {
-      document.getElementById('searchKeywordHidden').value = 'site:butterpig.top ' + document.getElementById('searchKeyword').value;
+      document.getElementById('searchKeywordHidden').value = 'site:www.butterpig.top ' + document.getElementById('searchKeyword').value;
       document.getElementById('searchForm').submit();
     }
   },
