@@ -19,11 +19,11 @@
     <title>spa单页面应用(vue react angular)通过预渲染实现seo优化 | ButterPig</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     
-        <meta name="keywords" content="seo优化,预渲染,spa单页面,prerender,SSR" >
+        <meta name="keywords" content="预渲染,spa单页面预渲染,prerender,SSR" >
         
 
     
-        <meta name="description" content="通过预渲染实现spa单页面应用(vue react angular)的seo优化分析" >
+        <meta name="description" content="讲解如何通过预渲染实现spa单页面应用(vue react angular)的seo优化分析" >
         
    
 
@@ -37,7 +37,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1614938685620.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1614939087780.css">
 
     <!--[if lt IE 9]>
     
@@ -130,7 +130,7 @@
 <p>如果是新版的vue cli脚手架项目，一般没有webpack文件，因为脚手架已经自动配置好了，想要把插件代码加入到webpack中，则要在vue.config.js文件中，通过configureWebpack属性来实现，则可以将配置插入到webpack配置文件中。例如：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; vue.config.js</span><br><span class="line">&#x2F;&#x2F; In my case i was doing below and was facing the same error</span><br><span class="line">const path &#x3D; require(&#39;path&#39;)</span><br><span class="line">const PrerenderSPAPlugin &#x3D; require(&#39;prerender-spa-plugin&#39;)</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">    configureWebpack: &#123;</span><br><span class="line">        plugins: [</span><br><span class="line">               new PrerenderSPAPlugin(&#123;</span><br><span class="line">                &#x2F;&#x2F; Required - The path to the webpack-outputted app to prerender.</span><br><span class="line">                staticDir: path.join(__dirname, &#39;dist&#39;),</span><br><span class="line">                &#x2F;&#x2F; Required - Routes to render.</span><br><span class="line">                routes: [&#39;&#x2F;&#39;, &#39;&#x2F;page-path&#39;, &#39;&#x2F;another-page&#39;],</span><br><span class="line">            &#125;)</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    lintOnSave: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
 
-<p>现在就可以直接使用预渲染功能了，通过在线的模拟蜘蛛查询，发现网页被爬到的html内容确实多很多。</p>
+<p>现在就可以直接使用预渲染功能了，通过在线的模拟蜘蛛查询，发现网页被爬到的html内容确实多了很多。</p>
 
     </div>
     <p class="eof">-- EOF --</p>
@@ -293,6 +293,8 @@
   
     <a class="tag-item" href="/blog/tags/elementui/" title="elementui">elementui (1)</a>
   
+    <a class="tag-item" href="/blog/tags/hexo/" title="hexo">hexo (1)</a>
+  
     <a class="tag-item" href="/blog/tags/akb48/" title="akb48">akb48 (1)</a>
   
     <a class="tag-item" href="/blog/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习">机器学习 (1)</a>
@@ -306,8 +308,6 @@
     <a class="tag-item" href="/blog/tags/markdown/" title="markdown">markdown (1)</a>
   
     <a class="tag-item" href="/blog/tags/Java%E6%8A%80%E6%9C%AF/" title="Java技术">Java技术 (1)</a>
-  
-    <a class="tag-item" href="/blog/tags/hexo/" title="hexo">hexo (1)</a>
   
 </div>
     </section>
@@ -355,7 +355,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1614938685621.js"></script>
+<script src="/blog/js/main.js?v=1614939087781.js"></script>
 
 
 </body>
