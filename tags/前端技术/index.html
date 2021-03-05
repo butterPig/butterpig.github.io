@@ -37,7 +37,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1614840616887.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1614938685667.css">
 
     <!--[if lt IE 9]>
     
@@ -117,6 +117,51 @@
             
         </strong>
     </h3>
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://www.butterpig.top/blog/hexo-img-center/">
+    		在hexo博客文章中让图片居中显示的两种简单方法
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        butterPig 发表于
+        <time datetime="2021-03-05T06:17:46.000Z">2021-03-05</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a> / 
+    
+        <a href="/blog/tags/hexo/" title="hexo">hexo</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h3 id="在markdown语法的插入图片功能中，是天生不支持设置图片居中以及图片显示宽高这些属性的。好在markdown是支持html语法的，因此曲线救国的办法倒是相当多，下面介绍两种实现markdown中图片水平居中的办法，不然写博文时，图片总是靠左显示。"><a href="#在markdown语法的插入图片功能中，是天生不支持设置图片居中以及图片显示宽高这些属性的。好在markdown是支持html语法的，因此曲线救国的办法倒是相当多，下面介绍两种实现markdown中图片水平居中的办法，不然写博文时，图片总是靠左显示。" class="headerlink" title="在markdown语法的插入图片功能中，是天生不支持设置图片居中以及图片显示宽高这些属性的。好在markdown是支持html语法的，因此曲线救国的办法倒是相当多，下面介绍两种实现markdown中图片水平居中的办法，不然写博文时，图片总是靠左显示。"></a>在markdown语法的插入图片功能中，是天生不支持设置图片居中以及图片显示宽高这些属性的。好在markdown是支持html语法的，因此曲线救国的办法倒是相当多，下面介绍两种实现markdown中图片水平居中的办法，不然写博文时，图片总是靠左显示。</h3>
+            
+            <p class="more">
+                <a href="http://www.butterpig.top/blog/hexo-img-center/">阅读剩下更多</a>
+            </p>
+        </div>
+    </div>
+</article>
+
     
         <!-- 文章列表 item -->
 <article class="post">
@@ -519,53 +564,6 @@
 </article>
 
     
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="http://www.butterpig.top/blog/spa-seo-prerender/">
-    		spa单页面应用(vue react angular)通过预渲染实现seo优化
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        butterPig 发表于
-        <time datetime="2021-02-18T07:08:16.000Z">2021-02-18</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a> / 
-    
-        <a href="/blog/tags/seo/" title="seo">seo</a> / 
-    
-        <a href="/blog/tags/spa/" title="spa">spa</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>最近用Vue写的个人网站<a href="http://www.butterpig.top/" title="" target="">butterPig</a>上线有一段时间了。但是一直没有被收录，经过苦思冥想，发现会不会是seo没有优化的原因。果然百度之后，发现这种单页面应用的对seo极其的不友好，百度的爬虫并不会等到js文件加载渲染完成页面后再爬内容。因此单页面网站的内容对于百度爬虫来说，就是空的，基本上啥也没有。相当蛋疼的事情。<br>vue react angular等框架的单页面应用，想彻底解决seo问题，还是要实现SSR服务端渲染。但是对于一个已经做好的网站，再去改成服务端渲染，实在是劳民伤财。所以只有使用一个折中的方案，就是prerender预渲染。将部分或者全部页面预先渲染成html静态文件保存着。然后有用户请求的时候就传输过去。<br>因此只要是webpack的项目，就可以使用<a href="https://github.com/chrisvfritz/prerender-spa-plugin" title="" target="">prerender-spa-plugin</a>插件来实现预渲染，非常方便。</p>
-            
-            <p class="more">
-                <a href="http://www.butterpig.top/blog/spa-seo-prerender/">阅读剩下更多</a>
-            </p>
-        </div>
-    </div>
-</article>
-
-    
 
     
     <nav class="page-navigator">
@@ -622,12 +620,12 @@
     
     <li>
         <a href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
-        <span class="badge">(20)</span>
+        <span class="badge">(21)</span>
     </li>
     
     <li>
         <a href="/blog/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a>
-        <span class="badge">(2)</span>
+        <span class="badge">(3)</span>
     </li>
     
     <li>
@@ -654,9 +652,11 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术 (15)</a>
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术 (16)</a>
   
     <a class="tag-item" href="/blog/tags/seo/" title="seo">seo (5)</a>
+  
+    <a class="tag-item" href="/blog/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" title="资源分享">资源分享 (3)</a>
   
     <a class="tag-item" href="/blog/tags/svg/" title="svg">svg (3)</a>
   
@@ -664,13 +664,13 @@
   
     <a class="tag-item" href="/blog/tags/canvas/" title="canvas">canvas (2)</a>
   
-    <a class="tag-item" href="/blog/tags/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" title="资源分享">资源分享 (2)</a>
-  
     <a class="tag-item" href="/blog/tags/butterPig%E7%BD%91%E7%AB%99/" title="butterPig网站">butterPig网站 (2)</a>
   
     <a class="tag-item" href="/blog/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91/" title="移动端开发">移动端开发 (1)</a>
   
     <a class="tag-item" href="/blog/tags/elementui/" title="elementui">elementui (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/akb48/" title="akb48">akb48 (1)</a>
   
     <a class="tag-item" href="/blog/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习">机器学习 (1)</a>
   
@@ -683,6 +683,8 @@
     <a class="tag-item" href="/blog/tags/markdown/" title="markdown">markdown (1)</a>
   
     <a class="tag-item" href="/blog/tags/Java%E6%8A%80%E6%9C%AF/" title="Java技术">Java技术 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/hexo/" title="hexo">hexo (1)</a>
   
 </div>
     </section>
@@ -730,7 +732,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1614840616888.js"></script>
+<script src="/blog/js/main.js?v=1614938685668.js"></script>
 
 
 </body>
