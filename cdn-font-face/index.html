@@ -16,14 +16,14 @@
   </script>
 
     
-    <title>VUE中路由的几种方式router.replace() router.push() router.go()的区别和使用方法,编程式和申明式 | ButterPig-技术资源分享站</title>
+    <title>使用cdn来加速网络字体在前端的加载速度，并监听是否加载完成 | ButterPig-技术资源分享站</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     
-        <meta name="keywords" content="vue,路由方式,replace,push,go,编程式,申明式" >
+        <meta name="keywords" content="cdn加速字体,前端加载字体,fontface监听" >
         
 
     
-        <meta name="description" content="讲解在VUE中路由的几种方式router.replace() router.push() router.go()的区别和使用方法,以及编程式和申明式的书写方式" >
+        <meta name="description" content="分享如何使用cdn来加速网络字体在前端的加载速度，并监听是否加载完成的过程" >
         
    
 
@@ -37,7 +37,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1615170283190.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1615170283161.css">
 
     <!--[if lt IE 9]>
     
@@ -68,15 +68,15 @@
         <div class="dropnav iconfont icon-nav" id="JELON__btnDropNav"></div>
         <ul class="menu hidden" id="JELON__menu">
             
-            <li rel="/blog/vue-router/index.html" class="item ">
+            <li rel="/blog/cdn-font-face/index.html" class="item ">
                 <a href="/blog/" title="首页" class="iconfont icon-home">&nbsp;首页</a>
             </li>
             
-            <li rel="/blog/vue-router/index.html" class="item ">
+            <li rel="/blog/cdn-font-face/index.html" class="item ">
                 <a href="/blog/archives/" title="归档" class="iconfont icon-archives">&nbsp;归档</a>
             </li>
             
-            <li rel="/blog/vue-router/index.html" class="item ">
+            <li rel="/blog/cdn-font-face/index.html" class="item ">
                 <a href="/blog/about/" title="关于" class="iconfont icon-staff">&nbsp;关于</a>
             </li>
             
@@ -112,30 +112,28 @@
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>VUE中路由的几种方式router.replace() router.push() router.go()的区别和使用方法,编程式和申明式</span></h3>
+        <h3 class="post-title"><span>使用cdn来加速网络字体在前端的加载速度，并监听是否加载完成</span></h3>
     </header>
     <p class="post-meta text-center">
         butterPig 发表于
-        <time datetime="2021-02-10T07:22:10.000Z">2021-02-10</time>
+        <time datetime="2021-03-08T02:01:09.000Z">2021-03-08</time>
         <span id="busuanzi_container_page_pv">
             本文总阅读量<span id="busuanzi_value_page_pv"></span>次
           </span>
     </p>
     <div id="JELON__articlePostContent" class="post-content">
-        <p>讲解一下VUE中路由的几种方式：router.replace() router.push() router.go()的区别和使用方法,以及编程式和申明式的书写方法。  </p>
-<a id="more"></a>
+        <p>最近在个人网站<a href="http://www.butterpig.top/" title="" target="">butterpig</a>中实现了个性印章的在线设计功能，里面目前一共实现了有八九种个性印章的样式，并且还有六七种网络开源商用的网络字体类型。具体效果可以访问：<a href="http://www.butterpig.top/personalseal" title="" target="">个人印章在线设计</a>查看。  </p>
+<a id="more"></a>  
+<img src="https://cdn.jsdelivr.net/gh/butterPig/picall/img/20210306195919143.jpg" class="">  
 
-<h2 id="一、router-push"><a href="#一、router-push" class="headerlink" title="一、router.push()"></a>一、router.push()</h2><p>想要导航到不同的 URL，则使用 router.push 方法。这个方法会向 history 栈中添加一条新的记录。所以，当用户点击浏览器后退按钮时，则回到之前的URL页面。</p>
-<p>声明式： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to&#x3D;&quot;path&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<p>编程式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.push(path)</span><br></pre></td></tr></table></figure></p>
-<h2 id="二、router-replace"><a href="#二、router-replace" class="headerlink" title="二、router.replace()"></a>二、router.replace()</h2><p>和router.push()的主要区别在于，它不会向 history 添加新记录，而是跟它的方法名一样replace一样，替换掉当前的history记录。于是导航后不会留下前一个路由页面的 history 记录。即使点击返回后退按钮，也不可能退回到跳转之前的那个页面。</p>
-<p>声明式： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to&#x3D;&quot;path&quot; replace&gt;</span><br></pre></td></tr></table></figure></p>
-<p>编程式：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.replace(path)</span><br></pre></td></tr></table></figure></p>
-<p>通过给push方式添加replace:true参数，也可以实现：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&#123;path: &#39;&#x2F;home&#39;, replace: true&#125;)</span><br></pre></td></tr></table></figure>
+<p>印章的设计，其实原理非常简单，主要就是通过canvas画图技术。而且画的内容也非常简单基础，因此不在这里具体说明。</p>
+<p>该功能的难点在于如何在前端加载第三方字体文件。众所周知，字体文件的格式一般有.ttf和.woff等，由于中文和英文的差异性，导致中文字体包的大小一般都比较大，一般都有好几M，更有几十M几百M的字体包文件。</p>
+<p>所以如果把这些字体文件放在自己的云服务器中，用户访问的时候加载到用户的浏览器，那对于一些带宽很小的云服务器简直不可想象。因此最终想到通过cdn加速来加载字体。最终证明该方法效果很好，同时也不占用任何服务端资源。</p>
+<p>具体的思路，就是讲字体文件都放到github中自己建的一个仓库中，然后通过jsdelivr来加速这个github仓库。因为jsdelivr本就是一个专门加速github中开源库的cdn，凡是我们放到github中并且公开的内容，都可以通过jsdelivr来作为cdn加速，非常的稳定和方便。具体的使用方法大家可以去jsdelivr的官网去看，非常简单，就是把url链接中的几个路径改成自己的仓库名称和文件名称就行了。</p>
+<p>该功能还有个问题，就是如何得知字体文件是否加载完成，是否加载成功或者失败。必须在加载成功后，马上回调来渲染canvas才行。然后html5中的@font-face是在真正用到该字体的是否，才自动去后台加载的，并且也不知道是否加载完成，导致前台的显示混乱。因此这里使用一个叫做fontfaceobserver的开源库，这个库的作用就是专门监听前端是否加载完成了某个字体，通过它的监听，我们就知道用户选择的某种字体是否通过cdn加载完成，并在加载完成后调用渲染。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new FontFaceObserver(&quot;font family&quot;).load(null, 15 * 1000).then(() &#x3D;&gt; &#123;</span><br><span class="line">          &#x2F;&#x2F;console.log(&#39;Font is available&#39;);</span><br><span class="line">          this.drawPreview()</span><br><span class="line">        &#125;, () &#x3D;&gt; &#123;</span><br><span class="line">          console.log(&#39;Font is not available&#39;);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>  
 
-
-<h2 id="三、router-go"><a href="#三、router-go" class="headerlink" title="三、router.go()"></a>三、router.go()</h2><p>这个方法的参数是一个整数，意思是在 history 记录栈中向前或者后退多少步，类似window.history.go(n)。也就是我们平时用浏览器上面的“上一页”和“下一页”功能的实现。 </p>
+<p>其中FontFaceObserver默认的字体加载超时时间是3秒，比较短，所以我们改成15秒以防万一，不过一般情况下，只要网速好，加载个几M的字体文件也就是瞬间而已。这样一来，个性印章工具的使用体验算是比较合理。</p>
 
     </div>
     <p class="eof">-- EOF --</p>
@@ -147,7 +145,9 @@
             标签：
             
     
-        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a>
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a> / 
+    
+        <a href="/blog/tags/cdn/" title="cdn">cdn</a>
     
 
         </span>
@@ -173,20 +173,16 @@
     
     <span class="prev fl">
         上一篇<br >
-        <a href="/blog/hexo-blog-use-busuanzi/">
-            
-                hexo博客使用不蒜子添加访问量和阅读量功能
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="/blog/js-generate-array/">
+        <a href="/blog/hexo-img-center/">
             
-                js一种不使用循环来生成连续数组的优雅方法
+                在hexo博客文章中让图片居中显示的两种简单方法
             
         </a>
     </span>
@@ -358,7 +354,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1615170283190.js"></script>
+<script src="/blog/js/main.js?v=1615170283162.js"></script>
 
 
 </body>

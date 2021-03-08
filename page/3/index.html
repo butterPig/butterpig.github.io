@@ -37,7 +37,7 @@
     <link rel="icon" href="/blog/favicon.ico" >
     
     
-<link rel="stylesheet" href="/blog/css/style.css?v=1615010665353.css">
+<link rel="stylesheet" href="/blog/css/style.css?v=1615170283225.css">
 
     <!--[if lt IE 9]>
     
@@ -118,6 +118,53 @@
             
         </strong>
     </h3>
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="http://www.butterpig.top/blog/spa-seo-prerender/">
+    		spa单页面应用(vue react angular)通过预渲染实现seo优化
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        butterPig 发表于
+        <time datetime="2021-02-18T07:08:16.000Z">2021-02-18</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术</a> / 
+    
+        <a href="/blog/tags/seo/" title="seo">seo</a> / 
+    
+        <a href="/blog/tags/spa/" title="spa">spa</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>最近用Vue写的个人网站<a href="http://www.butterpig.top/" title="" target="">butterPig</a>上线有一段时间了。但是一直没有被收录，经过苦思冥想，发现会不会是seo没有优化的原因。果然百度之后，发现这种单页面应用的对seo极其的不友好，百度的爬虫并不会等到js文件加载渲染完成页面后再爬内容。因此单页面网站的内容对于百度爬虫来说，就是空的，基本上啥也没有。相当蛋疼的事情。<br>vue react angular等框架的单页面应用，想彻底解决seo问题，还是要实现SSR服务端渲染。但是对于一个已经做好的网站，再去改成服务端渲染，实在是劳民伤财。所以只有使用一个折中的方案，就是prerender预渲染。将部分或者全部页面预先渲染成html静态文件保存着。然后有用户请求的时候就传输过去。<br>因此只要是webpack的项目，就可以使用<a href="https://github.com/chrisvfritz/prerender-spa-plugin" title="" target="">prerender-spa-plugin</a>插件来实现预渲染，非常方便。</p>
+            
+            <p class="more">
+                <a href="http://www.butterpig.top/blog/spa-seo-prerender/">阅读剩下更多</a>
+            </p>
+        </div>
+    </div>
+</article>
+
     
         <!-- 文章列表 item -->
 <article class="post">
@@ -513,49 +560,6 @@
 </article>
 
     
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="http://www.butterpig.top/blog/nginx-gzip-usage/">
-    		使用nginx的gzip压缩功能来显著加速前端项目的访问速度
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        butterPig 发表于
-        <time datetime="2021-02-05T01:55:24.000Z">2021-02-05</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="/blog/tags/nginx/" title="nginx">nginx</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>nginx开启gzip压缩功能， 可以使网站的css、js 、xml、html 等文件在传输时进行压缩，提高访问速度, 进而优化nginx性能!  </p>
-            
-            <p class="more">
-                <a href="http://www.butterpig.top/blog/nginx-gzip-usage/">阅读剩下更多</a>
-            </p>
-        </div>
-    </div>
-</article>
-
-    
 
     
     <nav class="page-navigator">
@@ -613,7 +617,7 @@
     
     <li>
         <a href="/blog/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/">前端技术</a>
-        <span class="badge">(21)</span>
+        <span class="badge">(22)</span>
     </li>
     
     <li>
@@ -645,7 +649,7 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术 (16)</a>
+    <a class="tag-item" href="/blog/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/" title="前端技术">前端技术 (17)</a>
   
     <a class="tag-item" href="/blog/tags/seo/" title="seo">seo (5)</a>
   
@@ -678,6 +682,8 @@
     <a class="tag-item" href="/blog/tags/markdown/" title="markdown">markdown (1)</a>
   
     <a class="tag-item" href="/blog/tags/Java%E6%8A%80%E6%9C%AF/" title="Java技术">Java技术 (1)</a>
+  
+    <a class="tag-item" href="/blog/tags/cdn/" title="cdn">cdn (1)</a>
   
 </div>
     </section>
@@ -725,7 +731,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/blog/js/main.js?v=1615010665354.js"></script>
+<script src="/blog/js/main.js?v=1615170283225.js"></script>
 
 
 </body>
